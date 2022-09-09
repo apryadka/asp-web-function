@@ -1,20 +1,62 @@
-﻿using System;
-
+﻿
 namespace Function
 {
     public enum SortOrder { Ascending, Descending }
     public static class Function
     {
-        //TODO :Define public static method 'IsSorted'  that indicate  correctness of sorting array with a given sort order .The values should be passed into the method in such order : array ,order. 
+        public static bool IsSorted(int[] array, SortOrder order)
+        {
+            var flag = true;
+            
+            if(order == SortOrder.Ascending)
+            {
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+                    if (array[i] > array[i + 1])
+                        flag = false;
+                }
+            }else if (order == SortOrder.Descending)
+            {
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+                    if (array[i] < array[i + 1])
+                        flag = false;
+                }
+            }
+            return flag;
+        }
+        public static void Transform(int[] array, SortOrder order)
+        {
+            if (!IsSorted(array, order)) return;
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] += i;
+            }
+        }
+       
+        public static double MultArithmeticElements(double a, double t, int n)
+        {
+            var sum = a;
 
+            for (int i = 0; i < n-1; i++)
+            {
+                a += t;
+                sum *= a;
+            }
 
-        // TODO :Define public static  method 'Transform' -  that will increase each array element by its index, if array IsSorted in  SortOrder  . The values should be passed into the method in such order : array ,order .
+            return sum;
+        }
+        public static double SumGeometricElements(double a, double t, double alim)
+        {
+            var sum =0d;
+            while (a > alim)
+            {
+                sum += a;
+                a *= t;
+            }
 
-
-        //TODO :Define public static  method 'MultArithmeticElements' that calculate and return   multiply   for  first n members of arifmetic  progression . The values should be passed into the method in such order : a ,t ,n . 
-
-
-        //TODO :Define public static method 'SumGeometricElements'  that calculate and return   sum for members of geometric progression ,while  element is smaller than limit value. The values should be passed into the method in such order: a ,t ,alim .  
-
+            return sum;
+        }
     }
 }
+
